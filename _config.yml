@@ -4,7 +4,7 @@ lang: en
 
 baseurl: ""
 url: "https://aavilezb.github.io"
-author: Your Name
+author: Alexander Avilez
 markdown: kramdown
 permalink: /:year/:month/:title/
 plugins:
