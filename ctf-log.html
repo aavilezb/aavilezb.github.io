@@ -1,0 +1,57 @@
+---
+layout: default
+title: CTF log
+permalink: /ctf-log/
+---
+<h1 class="page-title">CTF log</h1>
+<div class="stats" id="stats"></div>
+<div class="heat-wrap"><div class="heat" id="heat" aria-hidden="true"></div></div>
+<p class="meta" id="heat-note"></p>
+<h2>Solved</h2>
+<ol class="posts" id="log"></ol>
+<script id="ctf-data" type="application/json">{{ site.data.ctf_log | jsonify }}</script>
+<script>
+(function(){
+  var raw=JSON.parse(document.getElementById("ctf-data").textContent)||[];
+  var base="{{ site.baseurl }}";
+  function dn(s){var p=s.split("-");return Math.floor(Date.UTC(+p[0],+p[1]-1,+p[2])/864e5)}
+  var now=new Date(), today=Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/864e5);
+  var entries=raw.filter(function(e){return e&&e.date}).map(function(e){e.d=dn(String(e.date));return e})
+    .sort(function(a,b){return b.d-a.d});
+  var days={}; entries.forEach(function(e){days[e.d]=(days[e.d]||0)+1});
+  var keys=Object.keys(days).map(Number).sort(function(a,b){return a-b});
+  function streak(set,start,step){var n=0,k=start;while(set[k]){n++;k-=step}return n}
+  var cur=days[today]?streak(days,today,1):streak(days,today-1,1);
+  var best=0,run=0;keys.forEach(function(k,i){run=(i&&k===keys[i-1]+1)?run+1:1;if(run>best)best=run});
+  var wk={};keys.forEach(function(k){wk[Math.floor((k+3)/7)]=1});
+  var thisWk=Math.floor((today+3)/7);
+  var wcur=wk[thisWk]?streak(wk,thisWk,1):streak(wk,thisWk-1,1);
+  function stat(label,val){var d=document.createElement("div");d.className="stat";
+    var b=document.createElement("strong");b.textContent=val;var s=document.createElement("span");s.textContent=label;
+    d.appendChild(b);d.appendChild(s);document.getElementById("stats").appendChild(d)}
+  stat("Solved",entries.length);stat("Day streak",cur);stat("Week streak",wcur);stat("Best day streak",best);
+  var heat=document.getElementById("heat"),weeks=20;
+  var end=today+(6-((today+3)%7));
+  var startDay=end-weeks*7+1;
+  for(var d=startDay;d<=end;d++){
+    var c=document.createElement("i");
+    var n=days[d]||0;
+    if(d>today)c.className="future";else if(n>=3)c.className="l3";else if(n===2)c.className="l2";else if(n===1)c.className="l1";
+    var dt=new Date(d*864e5);c.title=dt.toISOString().slice(0,10)+": "+n;
+    heat.appendChild(c);
+  }
+  document.getElementById("heat-note").textContent=entries.length?
+    (cur?"You're on a "+cur+"-day streak.":(wcur?"No solve today yet. Your "+wcur+"-week streak is still alive.":"Solve one challenge to start a streak.")):
+    "Add your first solve in _data/ctf_log.yml to start a streak.";
+  var log=document.getElementById("log");
+  entries.slice(0,30).forEach(function(e){
+    var li=document.createElement("li"),t=document.createElement("time"),box=document.createElement("div"),
+        name=e.writeup?document.createElement("a"):document.createElement("span"),p=document.createElement("p");
+    t.textContent=String(e.date);
+    name.textContent=e.name||"Untitled";name.className="post-link";
+    if(e.writeup)name.href=base+e.writeup;
+    p.textContent=[e.platform,e.category,e.difficulty].filter(Boolean).join(", ");
+    box.appendChild(name);box.appendChild(p);li.appendChild(t);li.appendChild(box);log.appendChild(li);
+  });
+})();
+</script>

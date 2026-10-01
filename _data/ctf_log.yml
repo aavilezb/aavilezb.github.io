@@ -1,0 +1,10 @@
+# One entry per challenge you solve. Newest at the bottom is fine, order doesn't matter.
+# Copy this block, remove the leading "# " and fill it in:
+#
+# - date: 2026-10-01
+#   name: Challenge name
+#   platform: picoCTF
+#   category: web
+#   difficulty: easy
+#   writeup: /ctf/   # optional, link to your write-up
+[]

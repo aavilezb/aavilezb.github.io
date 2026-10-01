@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"sage"}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+  {% seo %}
+  {% feed_meta %}
+  {% if site.goatcounter != "" %}<script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>{% endif %}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <nav aria-label="Main">
+      {% for item in site.data.nav %}
+      <a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
+      {% endfor %}
+      <button class="theme" type="button" id="theme-toggle" aria-label="Switch theme">Sepia</button>
+    </nav>
+  </header>
+  <main id="main">
+    {{ content }}
+  </main>
+  <footer class="foot">
+    {% assign l = site.links %}
+    <p class="links">
+      {% if l.github != "" %}<a href="{{ l.github }}">GitHub</a>{% endif %}
+      {% if l.linkedin != "" %}<a href="{{ l.linkedin }}">LinkedIn</a>{% endif %}
+      {% if l.email != "" %}<a href="mailto:{{ l.email }}">Email</a>{% endif %}
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </p>
+    &copy; {{ 'now' | date: "%Y" }} {{ site.author }}{% if site.goatcounter != "" %}<span id="visits"></span>{% endif %}
+  </footer>
+<script>
+(function(){
+  var b=document.getElementById("theme-toggle"),r=document.documentElement;
+  function label(){b.textContent=r.dataset.theme==="sepia"?"Sage":"Sepia"}
+  label();
+  b.addEventListener("click",function(){
+    var n=r.dataset.theme==="sepia"?"sage":"sepia";
+    r.dataset.theme=n;
+    try{localStorage.setItem("theme",n)}catch(e){}
+    label();
+  });
+})();
+</script>
+{% if site.goatcounter != "" %}
+<script>
+fetch("https://{{ site.goatcounter }}.goatcounter.com/counter/TOTAL.json")
+  .then(function(r){return r.json()})
+  .then(function(d){if(d&&d.count)document.getElementById("visits").textContent=". "+d.count+" views"})
+  .catch(function(){});
+</script>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,21 @@
+---
+layout: default
+title: CTFs
+permalink: /ctf/
+---
+<h1 class="page-title">CTFs</h1>
+<p><a href="{{ '/ctf-log/' | relative_url }}">See the CTF log and streak</a></p>
+<ol class="posts">
+{% assign items = site.categories['ctf'] %}
+{% for post in items %}
+  <li>
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+    <div>
+      <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      {% if post.tags %}<p>{{ post.tags | join: ", " }}</p>{% endif %}
+    </div>
+  </li>
+{% else %}
+  <li><p>Nothing here yet.</p></li>
+{% endfor %}
+</ol>

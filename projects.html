@@ -1,0 +1,43 @@
+---
+layout: default
+title: Projects
+permalink: /projects/
+---
+<h1 class="page-title">Projects</h1>
+<ol class="posts">
+{% assign items = site.categories['projects'] %}
+{% for post in items %}
+  <li>
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+    <div>
+      <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      {% if post.tags %}<p>{{ post.tags | join: ", " }}</p>{% endif %}
+    </div>
+  </li>
+{% else %}
+  <li><p>Nothing here yet.</p></li>
+{% endfor %}
+</ol>
+
+{% if site.github_username != "" %}
+<h2>Code on GitHub</h2>
+<ul class="repos" id="repos" data-user="{{ site.github_username }}"></ul>
+<script>
+(function(){
+  var ul=document.getElementById("repos"), u=ul.dataset.user;
+  fetch("https://api.github.com/users/"+u+"/repos?per_page=100&sort=updated")
+    .then(function(r){if(!r.ok)throw 0;return r.json()})
+    .then(function(list){
+      list.filter(function(r){return !r.fork})
+        .sort(function(a,b){return b.stargazers_count-a.stargazers_count||new Date(b.pushed_at)-new Date(a.pushed_at)})
+        .slice(0,6).forEach(function(r){
+          var li=document.createElement("li"),a=document.createElement("a"),p=document.createElement("p");
+          a.href=r.html_url;a.textContent=r.name;
+          p.textContent=[r.description,r.language,r.stargazers_count?r.stargazers_count+" stars":""].filter(Boolean).join(", ");
+          li.appendChild(a);li.appendChild(p);ul.appendChild(li);
+        });
+    })
+    .catch(function(){ul.innerHTML='<li><a href="https://github.com/'+u+'">See my repos on GitHub</a></li>'});
+})();
+</script>
+{% endif %}

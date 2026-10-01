@@ -1,0 +1,27 @@
+---
+layout: default
+title: Inicio
+---
+{% assign featured = site.posts | where: "featured", true %}
+{% if featured.size > 0 %}
+<h2 class="start">Start here</h2>
+<ul class="repos">
+{% for post in featured %}
+  <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a>{% if post.summary %}<p>{{ post.summary }}</p>{% endif %}</li>
+{% endfor %}
+</ul>
+{% endif %}
+<h1 class="page-title">All posts</h1>
+<ol class="posts">
+{% for post in site.posts %}
+  <li>
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+    <div>
+      <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      {% if post.excerpt %}<p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>{% endif %}
+    </div>
+  </li>
+{% else %}
+  <li><p>Nothing here yet. Add a file to <code>_posts/</code>.</p></li>
+{% endfor %}
+</ol>

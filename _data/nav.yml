@@ -1,0 +1,14 @@
+- title: Posts
+  url: /
+- title: Projects
+  url: /projects/
+- title: Notes
+  url: /notes/
+- title: CTFs
+  url: /ctf/
+- title: Personal
+  url: /personal/
+- title: About
+  url: /about/
+- title: Resume
+  url: /resume/
