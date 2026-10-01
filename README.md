@@ -32,3 +32,9 @@ Add one entry per solved challenge to `_data/ctf_log.yml` (the file has a templa
 1. Sign up at goatcounter.com (free for personal sites) and pick a code, e.g. `alex`.
 2. In GoatCounter: Settings, then turn on "Allow adding visitor counts on your website".
 3. Put the code in `goatcounter:` in `_config.yml`. The footer then shows the total views, and the GoatCounter dashboard shows pages, referrers and countries.
+
+## Home page
+- Name and photo: `author` in `_config.yml` and `assets/img/profile.jpg` (the photo only shows if the file exists).
+- Short bio and tagline: edit `index.html`.
+- News: add lines to `_data/news.yml`.
+- Cards under "Projects" come from posts with `category: projects`; "Start here" from posts with `featured: true`.

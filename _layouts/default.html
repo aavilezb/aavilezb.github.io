@@ -10,12 +10,12 @@
   <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
   {% seo %}
   {% feed_meta %}
-  {% if site.goatcounter != "" %}<script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>{% endif %}
+  {% if site.goatcounter and site.goatcounter != "" %}<script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>{% endif %}
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="top">
-    <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <a class="brand" href="{{ '/' | relative_url }}">{{ site.author }}</a>
     <nav aria-label="Main">
       {% for item in site.data.nav %}
       <a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
@@ -29,12 +29,12 @@
   <footer class="foot">
     {% assign l = site.links %}
     <p class="links">
-      {% if l.github != "" %}<a href="{{ l.github }}">GitHub</a>{% endif %}
-      {% if l.linkedin != "" %}<a href="{{ l.linkedin }}">LinkedIn</a>{% endif %}
-      {% if l.email != "" %}<a href="mailto:{{ l.email }}">Email</a>{% endif %}
+      {% if l.github and l.github != "" %}<a href="{{ l.github }}">GitHub</a>{% endif %}
+      {% if l.linkedin and l.linkedin != "" %}<a href="{{ l.linkedin }}">LinkedIn</a>{% endif %}
+      {% if l.email and l.email != "" %}<a href="mailto:{{ l.email }}">Email</a>{% endif %}
       <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
     </p>
-    &copy; {{ 'now' | date: "%Y" }} {{ site.author }}{% if site.goatcounter != "" %}<span id="visits"></span>{% endif %}
+    &copy; {{ 'now' | date: "%Y" }} {{ site.author }}{% if site.goatcounter and site.goatcounter != "" %}<span id="visits"></span>{% endif %}
   </footer>
 <script>
 (function(){
@@ -49,7 +49,7 @@
   });
 })();
 </script>
-{% if site.goatcounter != "" %}
+{% if site.goatcounter and site.goatcounter != "" %}
 <script>
 fetch("https://{{ site.goatcounter }}.goatcounter.com/counter/TOTAL.json")
   .then(function(r){return r.json()})

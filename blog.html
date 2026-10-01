@@ -1,0 +1,25 @@
+---
+layout: default
+title: Blog
+permalink: /blog/
+---
+<h1 class="page-title">Blog</h1>
+<p class="chips">
+  <a href="{{ '/projects/' | relative_url }}">Projects</a>
+  <a href="{{ '/notes/' | relative_url }}">Notes</a>
+  <a href="{{ '/ctf/' | relative_url }}">CTFs</a>
+  <a href="{{ '/personal/' | relative_url }}">Personal</a>
+</p>
+<ol class="posts">
+{% for post in site.posts %}
+  <li>
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+    <div>
+      <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      {% if post.excerpt %}<p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>{% endif %}
+    </div>
+  </li>
+{% else %}
+  <li><p>Nothing here yet. Add a file to <code>_posts/</code>.</p></li>
+{% endfor %}
+</ol>

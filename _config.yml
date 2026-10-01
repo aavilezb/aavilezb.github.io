@@ -1,29 +1,33 @@
 title: Notebook
-description: Projects, CTF notes, things I found interesting and occasional photos of my dog 
+description: Graduate student working on embedded systems and security. Projects, CTF write-ups and notes.
 lang: en
-
+# If your repo is named <username>.github.io, leave baseurl empty.
+# If it has another name (e.g. "blog"), set: baseurl: "/blog"
 baseurl: ""
-url: "https://aavilezb.github.io"
-author: Alexander Avilez
+url: "https://YOUR-USERNAME.github.io"
+author: Your Name
 markdown: kramdown
 permalink: /:year/:month/:title/
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
+# Shows your public repos on the Projects page. Leave empty to hide.
 github_username: ""
 
-# Comments through GitHub Discussions (https://giscus.app). Leave repo empty to hide
+# Comments through GitHub Discussions (https://giscus.app). Leave repo empty to hide.
 giscus:
   repo: ""
   repo_id: ""
   category: "Announcements"
   category_id: ""
 
-# Shown in the footer. Leave empty to hide
+# Shown in the footer. Leave empty to hide.
 links:
-  github: "https://github.com/aavilezb"
-  linkedin: "www.linkedin.com/in/alexander-avilez-bah"
-  email: "aavilezb@purdue.edu"
+  github: ""
+  linkedin: ""
+  email: ""
 
+# Visit counter (https://www.goatcounter.com, free, no cookies).
+# Put your GoatCounter code here, e.g. "alex" for alex.goatcounter.com. Leave empty to turn off.
 goatcounter: ""

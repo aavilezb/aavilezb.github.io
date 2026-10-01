@@ -1,27 +1,76 @@
 ---
 layout: default
-title: Inicio
+title: Home
 ---
+{% assign photo = site.static_files | where: "path", "/assets/img/profile.jpg" | first %}
+<section class="hero">
+  {% if photo %}<img class="avatar" src="{{ '/assets/img/profile.jpg' | relative_url }}" alt="Portrait of {{ site.author }}">{% endif %}
+  <div>
+    <h1>{{ site.author }}</h1>
+    <p class="tagline">Graduate student in electrical and computer engineering at Purdue</p>
+    <p>I work on embedded systems and the security of the software that runs on them. Lately I'm getting into CTFs and writing down what I learn here, including the dead ends.</p>
+    {% assign l = site.links %}
+    <p class="btns">
+      {% if l.github and l.github != "" %}<a href="{{ l.github }}">GitHub</a>{% endif %}
+      {% if l.linkedin and l.linkedin != "" %}<a href="{{ l.linkedin }}">LinkedIn</a>{% endif %}
+      {% if l.email and l.email != "" %}<a href="mailto:{{ l.email }}">Email</a>{% endif %}
+      <a href="{{ '/resume/' | relative_url }}">Resume</a>
+    </p>
+  </div>
+</section>
+
+{% if site.data.news.size > 0 %}
+<section class="block">
+  <h2>News</h2>
+  <ul class="news">
+  {% for n in site.data.news limit: 6 %}
+    <li><time>{{ n.date }}</time><span>{{ n.text | markdownify | remove: '<p>' | remove: '</p>' }}</span></li>
+  {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
 {% assign featured = site.posts | where: "featured", true %}
 {% if featured.size > 0 %}
-<h2 class="start">Start here</h2>
-<ul class="repos">
-{% for post in featured %}
-  <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a>{% if post.summary %}<p>{{ post.summary }}</p>{% endif %}</li>
-{% endfor %}
-</ul>
+<section class="block">
+  <h2>Start here</h2>
+  <div class="cards">
+  {% for post in featured limit: 4 %}
+    <a class="card" href="{{ post.url | relative_url }}">
+      <strong>{{ post.title }}</strong>
+      {% if post.summary %}<span>{{ post.summary }}</span>{% endif %}
+    </a>
+  {% endfor %}
+  </div>
+</section>
 {% endif %}
-<h1 class="page-title">All posts</h1>
-<ol class="posts">
-{% for post in site.posts %}
-  <li>
-    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
-    <div>
-      <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      {% if post.excerpt %}<p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>{% endif %}
-    </div>
-  </li>
-{% else %}
-  <li><p>Nothing here yet. Add a file to <code>_posts/</code>.</p></li>
-{% endfor %}
-</ol>
+
+{% assign proj = site.categories.projects %}
+{% if proj.size > 0 %}
+<section class="block">
+  <h2>Projects</h2>
+  <div class="cards">
+  {% for post in proj limit: 4 %}
+    <a class="card" href="{{ post.url | relative_url }}">
+      <strong>{{ post.title }}</strong>
+      <span>{% if post.summary %}{{ post.summary }}{% else %}{{ post.excerpt | strip_html | truncatewords: 22 }}{% endif %}</span>
+    </a>
+  {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="block">
+  <h2>Latest posts</h2>
+  <ol class="posts">
+  {% for post in site.posts limit: 4 %}
+    <li>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+      <div><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
+    </li>
+  {% else %}
+    <li><p>Nothing here yet.</p></li>
+  {% endfor %}
+  </ol>
+  <p><a href="{{ '/blog/' | relative_url }}">All posts</a></p>
+</section>

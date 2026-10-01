@@ -11,7 +11,7 @@ layout: default
   </header>
   {{ content }}
 </article>
-{% if site.giscus.repo != "" and page.comments != false %}
+{% if site.giscus.repo and site.giscus.repo != "" and page.comments != false %}
 <script src="https://giscus.app/client.js"
   data-repo="{{ site.giscus.repo }}"
   data-repo-id="{{ site.giscus.repo_id }}"

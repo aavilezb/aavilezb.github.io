@@ -19,7 +19,7 @@ permalink: /projects/
 {% endfor %}
 </ol>
 
-{% if site.github_username != "" %}
+{% if site.github_username and site.github_username != "" %}
 <h2>Code on GitHub</h2>
 <ul class="repos" id="repos" data-user="{{ site.github_username }}"></ul>
 <script>
