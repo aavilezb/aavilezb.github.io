@@ -5,7 +5,12 @@ permalink: /about/
 ---
 # About
 
-Write two or three plain sentences here: what you study or work on, what you're learning now, and why you keep this blog. Replace this text.
+Hey, I'm Alex. I'm from Mexico and I'm doing my master's at Purdue.
+
+I'll watch or play pretty much any sport. Soccer and basketball are my favorites (golf is not a sport, and I can watch baseball ONLY during the playoffs).
+
+Outside of that I like being outdoors and going to places I haven't been, usually with my dog, Charmin.
 
 ![Charmin]({{ '/assets/img/charmin.jpg' | relative_url }})
-*Charmin.*
+
+This site is where I write down what I'm learning about software and hardware security, and about where the two meet.
