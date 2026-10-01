@@ -11,6 +11,6 @@ I'll watch or play pretty much any sport. Soccer and basketball are my favorites
 
 Outside of that I like being outdoors and going to places I haven't been, usually with my dog, Charmin.
 
-![Charmin]({{ '/assets/img/charmin.jpg' | relative_url }})
+![Charmin]({{ '/assets/img/Charmin.jpeg' | relative_url }})
 
 This site is where I write down what I'm learning about software and hardware security, and about where the two meet.
