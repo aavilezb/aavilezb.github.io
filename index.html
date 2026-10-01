@@ -2,13 +2,13 @@
 layout: default
 title: Home
 ---
-{% assign photo = site.static_files | where: "path", "/assets/img/profile.jpg" | first %}
+{% assign photo = site.static_files | where: "path", "/assets/img/profile.jpeg" | first %}
 <section class="hero">
-  {% if photo %}<img class="avatar" src="{{ '/assets/img/profile.jpg' | relative_url }}" alt="Portrait of {{ site.author }}">{% endif %}
+  {% if photo %}<img class="avatar" src="{{ '/assets/img/profile.jpeg' | relative_url }}" alt="Portrait of {{ site.author }}">{% endif %}
   <div>
     <h1>{{ site.author }}</h1>
     <p class="tagline">Graduate student in electrical and computer engineering at Purdue</p>
-    <p>I work on embedded systems and the security of the software that runs on them. Lately I'm getting into CTFs and writing down what I learn here, including the dead ends.</p>
+    <p>I work on software and hardware security, and on the places where the two meet. Lately I'm getting into CTFs and writing down what I learn here, including the dead ends.</p>
     {% assign l = site.links %}
     <p class="btns">
       {% if l.github and l.github != "" %}<a href="{{ l.github }}">GitHub</a>{% endif %}
