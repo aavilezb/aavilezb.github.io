@@ -5,5 +5,4 @@ permalink: /resume/
 ---
 # Resume
 
-[Download PDF]({{ '/assets/resume.pdf' | relative_url }})
-
+[Download PDF]({{ '/assets/resume.pdf' | relative_url }}?v={{ site.time | date: "%s" }})
